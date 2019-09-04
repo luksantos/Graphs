@@ -3,6 +3,7 @@ package testegrafos;
 import br.com.davesmartins.grafos.grafos.lib.base.grafo.ETipoGrafo;
 import br.com.davesmartins.grafos.grafos.lib.base.grafo.Vertice;
 import br.com.davesmartins.grafos.grafos.lib.base.impl.GraphBaseMatrizAdjacencia;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -10,6 +11,9 @@ import java.util.List;
  * @author Grupo A
  */
 public class Grafo extends GraphBaseMatrizAdjacencia{
+    
+    private ArrayList<Vertice> vertices;
+    private ArrayList<Aresta> arestas;
 
     @Override
     public String[][] getMatrizAdjacencia() {
@@ -28,12 +32,12 @@ public class Grafo extends GraphBaseMatrizAdjacencia{
 
     @Override
     public int getOrdem() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return this.vertices.size();
     }
 
     @Override
     public int getNumeroArestas() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return this.arestas.size();
     }
 
     @Override
