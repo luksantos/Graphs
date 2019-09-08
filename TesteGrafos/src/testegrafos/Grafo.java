@@ -10,14 +10,30 @@ import java.util.List;
  *
  * @author Grupo A
  */
-public class Grafo extends GraphBaseMatrizAdjacencia{
-    
-    private ArrayList<Vertice> vertices;
-    private ArrayList<Aresta> arestas;
+public class Grafo extends GraphBaseMatrizAdjacencia {
+
+    private List<Vertice> vertices;
+    private List<Aresta> arestas;
+    private boolean direcionado = false;
+
+    public Grafo() {
+        this.vertices = new ArrayList<Vertice>();
+        this.arestas = new ArrayList<Aresta>();
+    }
 
     @Override
     public String[][] getMatrizAdjacencia() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        String[][] matrizAdjacente = new String[vertices.size()][vertices.size()];
+        for (int i = 0; i < vertices.size(); i++) {
+            for (int j = 0; j < vertices.size(); j++) {
+                if (isVerticesAdjacentes(vertices.get(i), vertices.get(j))) {
+                    matrizAdjacente[i][j] = "1";
+                } else {
+                    matrizAdjacente[i][j] = "0";
+                }
+            }
+        }
+        return matrizAdjacente;
     }
 
     @Override
@@ -27,7 +43,8 @@ public class Grafo extends GraphBaseMatrizAdjacencia{
 
     @Override
     public String[] getMembros() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        String membros[] = {"Leonardo Campos", "Lucas Rangel", "Rafael Franco"};
+        return membros;
     }
 
     @Override
@@ -42,37 +59,82 @@ public class Grafo extends GraphBaseMatrizAdjacencia{
 
     @Override
     public int getGrau(Vertice vrtc) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        int cont = 0;
+        for (Aresta aresta : arestas) {
+            if (aresta.getVerticeEmissor().getNome().equals(vrtc.getNome()) || aresta.getVerticeReceptor().getNome().equals(vrtc.getNome())) {
+                cont++;
+            }
+        }
+        return cont;
     }
 
     @Override
     public int getGrauEmissao(Vertice vrtc) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        int cont = 0;
+        for (Aresta aresta : arestas) {
+            if (aresta.getVerticeEmissor().getNome().equals(vrtc.getNome())) {
+                cont++;
+            }
+        }
+        return cont;
     }
 
     @Override
     public int getGrauRecpcao(Vertice vrtc) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        int cont = 0;
+        for (Aresta aresta : arestas) {
+            if (aresta.getVerticeReceptor().getNome().equals(vrtc.getNome())) {
+                cont++;
+            }
+        }
+        return cont;
     }
 
     @Override
     public List<Vertice> getVertices() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return vertices;
+    }
+
+    public Boolean isVerticesAdjacentes(Vertice verticeEmissor, Vertice verticeReceptor) {
+
+        if (direcionado == true) {
+            for (Aresta aresta : arestas) {
+                if ((aresta.getVerticeEmissor().getNome().equals(verticeEmissor.getNome()) && aresta.getVerticeReceptor().getNome().equals(verticeReceptor.getNome()))) {
+                    return true;
+                }
+            }
+            return false;
+        }
+        for (Aresta aresta : arestas) {
+            if ((aresta.getVerticeEmissor().getNome().equals(verticeEmissor.getNome()) && aresta.getVerticeReceptor().getNome().equals(verticeReceptor.getNome()))
+                    || (aresta.getVerticeReceptor().getNome().equals(verticeEmissor.getNome()) && aresta.getVerticeEmissor().getNome().equals(verticeReceptor.getNome()))) {
+                return true;
+            }
+        }
+        return false;
     }
 
     @Override
     public void clickAddVertice(String string) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Vertice vertice = new Vertice(string);
+        vertices.add(vertice);
+
     }
 
     @Override
     public void clickAddAresta(Vertice vrtc, Vertice vrtc1) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Aresta aresta = new Aresta(vrtc, vrtc1, false);
+        arestas.add(aresta);
     }
 
     @Override
     public void changeTipoGrafo(ETipoGrafo etg) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+      if(direcionado == true){
+          direcionado = false;
+      }
+      else{
+          direcionado = true;
+      }
     }
-    
+
 }

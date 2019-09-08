@@ -1,59 +1,42 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package testegrafos;
 
-/**
- *
- * @author Grupo A
- */
+import br.com.davesmartins.grafos.grafos.lib.base.grafo.Vertice;
+
+
 public class Aresta {
-    
-    private Vertice origem;
-    private Vertice destino;
-    private String nome;
-    private double valor;
+    private Vertice verticeEmissor;
+    private Vertice verticeReceptor;
+    private boolean direcionado;
 
-    public Aresta(Vertice origem, Vertice destino, String nome, double valor) {
-        this.origem = origem;
-        this.destino = destino;
-        this.nome = nome;
-        this.valor = valor;
+    public Aresta(Vertice verticeEmissor, Vertice verticeReceptor, boolean direcionado) {
+        this.verticeEmissor = verticeEmissor;
+        this.verticeReceptor = verticeReceptor;
+        this.direcionado = direcionado;
     }
 
-    public Vertice getOrigem() {
-        return origem;
+    public boolean isDirecionado() {
+        return direcionado;
     }
 
-    public void setOrigem(Vertice origem) {
-        this.origem = origem;
+    public void setDirecionado(boolean direcionado) {
+        this.direcionado = direcionado;
     }
 
-    public Vertice getDestino() {
-        return destino;
+    public Vertice getVerticeEmissor() {
+        return verticeEmissor;
     }
 
-    public void setDestino(Vertice destino) {
-        this.destino = destino;
+    public void setVerticeEmissor(Vertice verticeEmissor) {
+        this.verticeEmissor = verticeEmissor;
     }
 
-    public String getNome() {
-        return nome;
+    public Vertice getVerticeReceptor() {
+        return verticeReceptor;
     }
 
-    public void setNome(String nome) {
-        this.nome = nome;
+    public void setVerticeReceptor(Vertice verticeReceptor) {
+        this.verticeReceptor = verticeReceptor;
     }
 
-    public double getValor() {
-        return valor;
-    }
-
-    public void setValor(double valor) {
-        this.valor = valor;
-    }
-    
     
 }
